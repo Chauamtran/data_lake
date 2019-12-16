@@ -1,0 +1,9 @@
+*.gz
+*.tgz
+*.csv
+.idea
+.DS_Store
+hdfs_hive_spark/configs/id_rsa*
+tools/
+
+

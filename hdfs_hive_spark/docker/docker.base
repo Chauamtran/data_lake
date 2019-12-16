@@ -1,0 +1,27 @@
+FROM python:3.6.8
+MAINTAINER chau.tran <chau.tran@paysmart.com.vn>
+
+ARG GID=1000
+ARG UID=1000
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libatlas-base-dev gfortran libblas-dev liblapack-dev \
+    openssh-server vim && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
+    if [ ! -e /usr/bin/python ]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
+    python -m ensurepip --upgrade && \
+    pip install pipenv && \
+    set -x && \
+    addgroup --gid $GID hadoop && \
+    useradd -r -u $UID -g $GID hadoop && \
+    rm -rf /var/cache/apt/*
+
+USER hadoop
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
+CMD . pipenv run pip install -U pip
+
+
