@@ -1,6 +1,6 @@
 FROM postgres:12.0
 
-MAINTAINER Chau.Tran <chau.tran@paysmart.com.vn>
+MAINTAINER Chau.Tran <chauamtran@gmail.com>
 
 USER root
 

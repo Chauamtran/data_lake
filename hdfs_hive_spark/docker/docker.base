@@ -1,5 +1,5 @@
 FROM python:3.6.8
-MAINTAINER chau.tran <chau.tran@paysmart.com.vn>
+MAINTAINER chau.tran <chauamtran@gmail.com>
 
 ARG GID=1000
 ARG UID=1000
