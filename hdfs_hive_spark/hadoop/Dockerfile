@@ -1,7 +1,7 @@
 ARG VERSION=1.0.0
 FROM hdfs-base:$VERSION
 
-MAINTAINER Chau.Tran <chau.tran@paysmart.com.vn>
+MAINTAINER Chau.Tran <chauamtran@gmail.com>
 
 USER root
 

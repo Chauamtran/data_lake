@@ -1,18 +1,15 @@
 #!/bin/bash
 # Author: Chau Tran
 
-VERSION='7.5.0'
+VERSION='6.8.5'
 CONFIG=$1
 
 #UID=$(id -u)
 #GID=$(id -g)
 
-#--build-arg UID="${UID}" --build-arg GID="${GID}"
-#--build-arg CONFIG="${CONFIG}" --build-arg VERSION="${VERSION}"
-
 function buildServices {
   echo ">> Building logstash images ..."
-  docker build  --build-arg CONFIG="${CONFIG}" --build-arg VERSION="${VERSION}" --rm -t logstash_"${CONFIG}":"${VERSION}" -f Dockerfile .
+  docker build  --build-arg CONFIG="${CONFIG}.conf" --build-arg VERSION="${VERSION}" --rm -t logstash_"${CONFIG}":"${VERSION}" -f Dockerfile .
   sleep 5
 }
 
@@ -21,8 +18,8 @@ function startServices {
   echo ">> Starting logstash ..."
   docker run -d --net zookeepernet \
               --ip 182.18.1.8 \
-              --hostname logstash-1 \
-              --name logstash-1 \
+              --hostname "${CONFIG}" \
+              --name "${CONFIG}" \
               --restart always \
               --link kafka-1:kafka-1 \
               --link kafka-2:kafka-2 \
@@ -32,40 +29,40 @@ function startServices {
               logstash_"${CONFIG}":"${VERSION}"
 
   echo ">> Connecting logstash to hadoops network interface"
-  docker network connect hadoopnet logstash-1
+  docker network connect hadoopnet "${CONFIG}"
 
   sleep 5
 }
 
 function stopServices {
   echo ">> Stopping logstash containers ..."
-  docker stop logstash-1
+  docker stop "${CONFIG}"
 }
 
 function deleteServices {
   echo ">> Stopping logstash containers ..."
-  docker stop logstash-1
+  docker stop "${CONFIG}"
   echo ">> Deleting logstash containers ..."
-  docker rm logstash-1
+  docker rm "${CONFIG}"
 }
 
 if [[ $2 = 'start' ]]; then
   echo ">> Start logstash services ..."
   buildServices
   startServices
-fi
-
-if [[ $2 = 'stop' ]]; then
+elif [[ $2 = 'stop' ]]; then
   echo ">> Stop logstash services ..."
   stopServices
-fi
-
-if [[ $2 = 'delete' ]]; then
+elif [[ $2 = 'delete' ]]; then
   echo ">> Delete logstash services ..."
   deleteServices
-fi
-
-if [[ $2 = 'build' ]]; then
+elif [[ $2 = 'build' ]]; then
   echo ">> Build logstash services ..."
   buildServices
+else
+  echo "Usage: logstash.sh instance_name start|stop|delete"
+  echo "                 start - a logstash instance"
+  echo "                 stop - a logstash instance"
+  echo "                 delete - a logstash instance"
 fi
+
