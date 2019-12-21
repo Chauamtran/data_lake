@@ -1,5 +1,5 @@
 # This is an example to build a big data project with most of popular services by docker  
-An overview of project
+[An overview of project](Data_Lake_Architecture.jpg)
 
 ## Instructions to deploy system to production env
 **Services in requirements**
