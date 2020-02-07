@@ -10,6 +10,7 @@ More details of project about building and explaining will be updated on Medium 
   > - Postgres (12.0) with Hive (apache-hive-2.3.4) 
   > - Scala (2.13.1)
   > - Spark (2.4.4) 
+  > - MongoDB (4.2)
   > - Logstash (6.8.5)
   > - Airflow (1.10.7)
 
@@ -57,10 +58,17 @@ TO be recommended:
   * **./logstash/logstash.sh**
   > - Start a logstash instance 
 
-### Steps to deploy services on server: 
+  * **build.sh**
+  > - Create ssh keys for services and run **make build** (Makefile)
+
+  * **cluster.sh**
+  > - Hadoop cluster info (Ip address config)
+  > - Start hadoop clusters including (nodemaster, node2, node3)
+
+#### Steps to deploy services on server: 
   IMPORTANT NOTES: Config Ip address of hadoop, kafka, zookeeper in 
   **cluster.sh, kafka_cluster.sh, zookeeper_cluster.sh**  
-  Start hadoop cluster, then zookeeper then kafka last
+  Start hadoop cluster, then zookeeper then kafka
   
   Under **hdfs_hive_spark** folder, to start hadoop cluster
   > - ./build.sh
@@ -74,8 +82,34 @@ TO be recommended:
   Under **./hdfs_hive_spark/kafka_zookeeper** folder, to start kafka cluster
   > - ./kafka_cluster.sh start # To start kafka cluster
   > - ./kafka_cluster.sh start # To stop kafka cluster
-
-  Under **./hdfs_hive_spark/logstash** folder, to start a logstash instance
-  > - ./logstash.sh instance_name start # To start a logstash instance
-  > - ./logstash.sh instance_name stop # To stop a logstash instance
-  > - ./logstash.sh instance_name delete # To delete a logstash instance
+### **python**
+  This folder contains python scripts that use to define tasks in airflow and other purposes
+  * **airflow**
+  > - *dags* to contain dag definitions of airflow
+  > - other folders for future in use
+  > - airflow.cfg to define configs in airflow. Note to run *airflow upgradedb* after changing in the config
+  * **config** 
+  > - configs for python scripts
+  * **ElasticSearchData**
+  > - Some example scripts to get data from ElasticSearch
+  * **MongoDbData**
+  > - Some example scripts to get data from MongoDB
+  * **utils**  
+  > - Some libs to connect DB services, cache data
+  * **requirements.txt**
+  > - File to define necessary python libs
+#### Steps to deploy airflow on server:
+  Since airflow will manage schedulers and include a UI webserver to monitor and control tasks, 
+  we do not deploy them by docker because of calling some other docker services
+  * Setup PYTHONPATH to point to project in .bashrc
+  * Do symbol link to map dags folder of airflow to dags in folder source
+  > - ln -s /usr/local/airflow/ $PYTHONPATH/python/airflow   
+  * Under python folder, start pipenv environment by *pipenv shell*
+  * Install python libs:
+  > - pip install -r requirements.txt
+  * Start airflow webserver by: **airflow webserver &**
+  * Start airflow scheduler by: **airflow scheduler &**
+  Notes:    
+## Client config on development env
+ 
+**Hadoop info @ nodemaster: http://nodemaster:8088/cluster**

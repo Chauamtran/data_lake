@@ -1,0 +1,95 @@
+version: "3.3"
+
+# Author Chau Tran
+networks:
+  hadoopnet:
+    external:
+      name: hadoopnet
+
+services:
+
+    ###############################################################################
+    ################################## DB CONFIGS #################################
+    ###############################################################################
+
+#    postgres:
+#        container_name: postgres
+#        hostname: postgres
+#        restart: always
+#        ports:
+#            - "5432:5432"
+#        build:
+#            context:
+#                ./postgresql
+#            dockerfile:
+#              ../postgresql-hms/Dockerfile
+#        volumes:
+#            - postgres_data:/var/lib/postgresql/data
+#        networks:
+#            hadoopnet:
+#                - ipv4_address: 172.18.1.8
+
+    ###############################################################################
+    ################################## AIRFLOW CONFIGS ############################
+    ###############################################################################
+
+    airflow_webserver:
+        container_name: airflow_webserver
+        image: airflow_postgres_airflow_webserver:latest
+        hostname: airflow_webserver
+        restart: always
+        environment:
+            AIRFLOW_USERNAME: chau.tran
+            AIRFLOW_EMAIL: zaracattle@gmail.com
+            AIRFLOW_PASSWORD: Abc123!
+        extra_hosts:
+          - "nodemaster:172.18.1.1"
+          - "psqlhms:172.18.1.4"
+        ports:
+            - "8081:8081"
+        build:
+            context:
+                airflow
+            dockerfile:
+                Dockerfile
+        healthcheck:
+            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
+        command: webserver
+        volumes:
+            - ../../python/airflow/dags:/usr/local/airflow/dags
+        networks:
+            - hadoopnet
+
+#    airflow_scheduler:
+#        container_name: airflow_scheduler
+#        hostname: airflow_scheduler
+#        restart: always
+#        environment:
+#            AIRFLOW_USERNAME: chau.tran
+#            AIRFLOW_EMAIL: zaracattle@gmail.com
+#            AIRFLOW_PASSWORD: Abc123!
+#        extra_hosts:
+#          - "nodemaster:172.18.1.1"
+#          - "psqlhms:172.18.1.4"
+#        build:
+#            context:
+#                airflow
+#            dockerfile:
+#                Dockerfile
+#        healthcheck:
+#            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-scheduler.pid ]"]
+#            interval: 30s
+#            timeout: 30s
+#            retries: 3
+#        entrypoint: scheduler
+#        volumes:
+#            - airflow_dags:/usr/local/airflow/dags
+#        networks:
+#            - hadoopnet
+
+#volumes:
+#    airflow_dags:
+

@@ -1,0 +1,18 @@
+ARG VERSION=6.8.5
+FROM docker.elastic.co/logstash/logstash:$VERSION
+ARG FOLDER=config
+# ARG DOCKERPATH
+
+MAINTAINER Chau.Tran <chauamtran@gmail.com>
+USER root
+
+RUN rm -f /usr/share/logstash/pipeline/logstash.conf && \
+    export LS_JAVA_OPTS="-Xmx2g -Xms1g" && \
+    export LS_JAVA_OPTS="-Dls.cgroup.cpuacct.path.override=/ -Dls.cgroup.cpu.path.override=/ $LS_JAVA_OPTS"
+
+COPY lib/mysql-connector-java-5.1.48.jar /usr/share/logstash/$FOLDER/mysql-connector-java-5.1.48.jar
+COPY config/$FOLDER /usr/share/logstash/pipeline/
+COPY config/$FOLDER/logstash.yml /usr/share/logstash/config/logstash.yml
+COPY config/$FOLDER/pipelines.yml /usr/share/logstash/config/pipelines.yml
+
+CMD logstash --config.reload.automatic

@@ -4,6 +4,7 @@
 .idea
 .DS_Store
 python/Pipfile.lock
+python/Pipfile
 python/logs
 system/configs/id_rsa*
 tools/
