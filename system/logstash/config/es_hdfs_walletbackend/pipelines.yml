@@ -1,5 +1,5 @@
-- pipeline.id: es_walletbackend_es_kafka
+- pipeline.id: es_example_es_kafka
   path.config: "/usr/share/logstash/pipeline/es_kafka.conf"
   pipeline.workers: 1
-- pipeline.id: es_walletbackend_kafka_hdfs
-  path.config: "/usr/share/logstash/pipeline/kafka_mongo.conf"
+- pipeline.id: es_example_kafka_hdfs
+  path.config: "/usr/share/logstash/pipeline/kafka_hdfs.conf"

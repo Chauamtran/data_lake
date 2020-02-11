@@ -22,6 +22,7 @@ It is likely inconvenient to use a docker service and call other docker services
 * **logstash**
   > - Configs to transfer data from external source to hadoop
   > - Docker file and scripts to start logstash jobs
+  > - Libs to install logstash plugins offline
   > - Logstash flow ![](logstash/LogstashFlows.jpg?raw=true)
 * **mongodb**
   > - Configs to mongodb 

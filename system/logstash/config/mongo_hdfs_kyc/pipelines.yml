@@ -1,5 +1,0 @@
-- pipeline.id: mongo_kyc_mongo_kafka
-  path.config: "/usr/share/logstash/pipeline/mongo_kafka.conf"
-  pipeline.workers: 1
-- pipeline.id: mongo_kyc_kafka_hdfs
-  path.config: "/usr/share/logstash/pipeline/kafka_mongo.conf"
