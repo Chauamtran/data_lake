@@ -2,16 +2,15 @@
 # Author: Chau Tran
 
 VERSION='6.8.5'
-FOLDER_CONFIG=$1
+FOLDER_CONFIG=$2
+DB=$(echo "${FOLDER_CONFIG}" | cut -d'_' -f1)
 
 printf "Passing %s %s" "${FOLDER_CONFIG}" "${VERSION}"
 
-#UID=$(id -u)
-#GID=$(id -g)
-
 function buildServices {
   echo ">> Building logstash images ..."
-  docker build --rm -t logstash_"${FOLDER_CONFIG}":"${VERSION}" -f Dockerfile \
+  docker build --rm -t logstash_"${FOLDER_CONFIG}":"${VERSION}" \
+               -f Dockerfile_"${DB}" \
                --build-arg FOLDER="${FOLDER_CONFIG}" \
                --build-arg VERSION="${VERSION}" .
   sleep 5
@@ -20,21 +19,14 @@ function buildServices {
 function startServices {
     # 1 node
   echo ">> Starting logstash ..."
-  docker run -d --net zookeepernet \
-              --ip 182.18.1.8 \
+  docker run -d --net host \
               --hostname "${FOLDER_CONFIG}" \
               --name "${FOLDER_CONFIG}" \
               --restart always \
-              --link kafka-1:kafka-1 \
-              --link kafka-2:kafka-2 \
-              --link kafka-3:kafka-3 \
-              --link nodemaster:nodemaster \
+              --log-opt max-size=100m \
+              --log-opt max-file=5 \
               -v "${FOLDER_CONFIG}":/usr/share/logstash/"${FOLDER_CONFIG}" \
-              -p 5044:5044 \
               logstash_"${FOLDER_CONFIG}":"${VERSION}"
-
-  echo ">> Connecting logstash to hadoops network interface"
-  docker network connect hadoopnet "${FOLDER_CONFIG}"
 
   sleep 5
 }
@@ -51,24 +43,30 @@ function deleteServices {
   docker rm "${FOLDER_CONFIG}"
 }
 
-if [[ $2 = 'start' ]]; then
+if [[ $1 = 'start' ]]; then
   echo ">> Start logstash services ..."
-  buildServices
   startServices
-elif [[ $2 = 'stop' ]]; then
+  exit
+elif [[ $1 = 'stop' ]]; then
   echo ">> Stop logstash services ..."
   stopServices
-elif [[ $2 = 'delete' ]]; then
+  exit
+elif [[ $1 = 'down' ]]; then
   echo ">> Delete logstash services ..."
   deleteServices
-elif [[ $2 = 'build' ]]; then
+  exit
+elif [[ $1 = 'up' ]]; then
   echo ">> Build logstash services ..."
   buildServices
+  startServices
+  exit
 else
-  echo "Usage: logstash.sh instance_name start|stop|delete"
-  echo "                 instance_name - a folder where stores config of logstash instance"
-  echo "                 start - start logstash instance"
+  echo "Usage: logstash.sh start|stop|up|down instance_name"
+  echo " Required.       instance_name - a folder where stores config of logstash instance"
+  echo " Required.       start - start logstash instance"
   echo "                 stop - stop logstash instance"
-  echo "                 delete - delete logstash instance"
+  echo "                 up - build and run logstash instance"
+  echo "                 down - delete logstash instance"
+
 fi
 
