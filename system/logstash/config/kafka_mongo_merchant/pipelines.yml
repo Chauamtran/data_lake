@@ -1,0 +1,3 @@
+- pipeline.id: kafka_merchant_kafka_mongo
+  path.config: "/usr/share/logstash/pipeline/kafka_mongo.conf"
+  pipeline.workers: 1

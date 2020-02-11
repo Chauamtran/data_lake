@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>jdbc:postgresql://psqlhms:5432/metastore</value>
+    <description>JDBC connect string for a JDBC metastore</description>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+    <value>org.postgresql.Driver</value>
+    <description>Driver class name for a JDBC metastore</description>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionUserName</name>
+    <value>hive</value>
+    <description>username to use against metastore database</description>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionPassword</name>
+    <value>hive</value>
+    <description>password to use against metastore database</description>
+  </property>
+  <property>
+    <name>hive.metastore.uris</name>
+    <value>thrift://nodemaster:9083</value>
+  </property>
+  <property>
+    <name>hive.metastore.schema.verification</name>
+    <value>false</value>
+  </property>
+  <property>
+     <name>datanucleus.schema.autoCreateAll</name>
+     <value>true</value>
+     <description>Creates necessary schema on a startup if one doesn't exist</description>
+  </property>
+  <property>
+     <name>hive.metastore.warehouse.dir</name>
+     <value>/user/hive/metastore</value>
+     <description>Metastore Warehouse</description>
+  </property>
+  <property>
+     <name>hive.server2.thrift.port</name>
+     <value>10000</value>
+     <description>Port number of HiveServer2 Thrift interface</description>
+  </property>
+  <property>
+     <name>hive.server2.thrift.bind.host</name>
+     <value>hiveserver2</value>
+     <description>Bind host on which to run the HiveServer2 Thrift interface</description>
+  </property>
+  <property>
+     <name>hive.server2.webui.host</name>
+     <value>hiveserver2</value>
+     <description>Host Hiveserver2 Web</description>
+  </property>
+  <property>
+     <name>hive.server2.webui.port</name>
+     <value>10002</value>
+     <description>Port Hiverserver2 Web to listen</description>
+  </property>
+  <property>
+     <name>hive.server2.webui.max.threads</name>
+     <value>20</value>
+     <description>The maximum number of HiveServer2 Web UI threads</description>
+  </property>
+  <property>
+     <name>hive.server2.webui.max.historic.queries</name>
+     <value>25</value>
+     <description>The maximum number of past queries to show in HiveServer2 Web UI.</description>
+  </property>
+  <property>
+     <name>hive.server2.logging.operation.enabled</name>
+     <value>true</value>
+     <description>Enable hiveserver2 logging.</description>
+  </property>
+  <property>
+     <name>hive.server2.logging.operation.log.location</name>
+     <value>/home/hadoop/hive/operation_logs</value>
+     <description>Enable hiveserver2 logging.</description>
+  </property>
+  <property>
+      <name>hive.server2.enable.doAs</name>
+      <value>false</value>
+  </property>
+</configuration>

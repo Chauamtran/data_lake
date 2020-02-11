@@ -3,7 +3,10 @@
 *.csv
 .idea
 .DS_Store
-hdfs_hive_spark/configs/id_rsa*
+python/Pipfile.lock
+python/Pipfile
+python/logs
+system/configs/id_rsa*
 tools/
 .vscode
 

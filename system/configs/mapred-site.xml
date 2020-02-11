@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>                                                                                                                                         
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+    <property>
+        <name>mapreduce.job.tracker</name>
+        <value>nodemaster:9001</value>
+    </property>
+    <property>
+		<name>mapreduce.jobhistory.address</name>
+		<value>nodemaster:10020</value>
+	</property>
+	<property>
+		<name>mapreduce.jobhistory.webapp.address</name>
+		<value>nodemaster:19888</value>
+	</property>
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>1536</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>1536</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.minimum-allocation-mb</name>
+        <value>128</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+    </property>
+
+    <property>
+      <name>mapreduce.map.output.compress</name>
+      <value>true</value>
+    </property>
+
+    <property>
+     <name>mapred.map.output.compress.codec</name>
+     <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+    </property>
+
+    <property>
+      <name>mapreduce.admin.user.env</name>
+      <value>LD_LIBRARY_PATH=/usr/hdp/2.2.0.0-1084/hadoop/lib/native</value>
+    </property>
+
+</configuration>

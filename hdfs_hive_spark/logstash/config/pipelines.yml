@@ -1,2 +1,0 @@
-- pipeline.id: authen_account
-  path.config: "/usr/share/logstash/pipeline/authen_account.conf"
