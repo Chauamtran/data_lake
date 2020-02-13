@@ -1,10 +1,11 @@
-import datetime
 import pytest
 
-from airflow import DAG
+pytest_plugins = ['helpers_namespace']
 
-@pytest.fixture
-def test_logstash_es_hdfs_walletbackend():
-    return DAG(
 
+@pytest.helpers.register
+def run_task(task, dag):
+    task.run(
+        start_date=dag.default_args["start_date"],
+        end_date=dag.default_args["start_date"]
     )
