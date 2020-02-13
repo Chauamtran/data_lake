@@ -74,22 +74,22 @@ TO be recommended:
   > - ip_address5 kafka-1 zk-1
   > - ip_address6 kafka-2 zk-2
   > - ip_address7 kafka-3 zk-3
-  * Under **hdfs_hive_spark** folder, to start hadoop cluster
+  * Under **system** folder, to build hadoop images
   > - ./build_nodemaster.sh
   > - ./build_datanode.sh
+  * Under **system/hadoop** folder, to start hadoop services
   > - ./nodemaster.sh 
   > - ./node2.sh
   > - ./node3.sh
-  
-  * Under **./hdfs_hive_spark/kafka_zookeeper** folder, to start zookeeper cluster
+  * Under **./system/kafka_zookeeper** folder, to start zookeeper cluster
   > - ./zookeeper_cluster.sh start # To start zookeeper cluster
   > - ./zookeeper_cluster.sh stop # To stop zookeeper cluster 
 
-  * Under **./hdfs_hive_spark/kafka_zookeeper** folder, to start kafka cluster
+  * Under **./system/kafka_zookeeper** folder, to start kafka cluster
   > - ./kafka_cluster.sh start # To start kafka cluster
   > - ./kafka_cluster.sh start # To stop kafka cluster
 
-  * Under **./hdfs_hive_spark/logstash** folder, to start a logstash instance
+  * Under **./system/logstash** folder, to start a logstash instance
   > - ./logstash.sh instance_name start # To start a logstash instance
   > - ./logstash.sh instance_name stop # To stop a logstash instance
   > - ./logstash.sh instance_name delete # To delete a logstash instance
