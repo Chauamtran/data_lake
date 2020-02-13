@@ -39,7 +39,11 @@
    </property>
     <property>
 		<name>dfs.namenode.secondary.http-address</name>
-		<value>nodemaster:50090</value>
+		<value>node2:9868</value>
+	</property>
+    <property>
+		<name>dfs.namenode.secondary.https-address</name>
+		<value>node2:9869</value>
 	</property>
     <property>
         <name>dfs.support.broken.append</name>
@@ -51,7 +55,7 @@
     </property>
     <property>
             <name>dfs.replication</name>
-            <value>2</value>
+            <value>3</value>
     </property>
     <property>
             <name>dfs.user.home.dir.prefix</name>

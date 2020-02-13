@@ -30,7 +30,7 @@ if os.path.exists(call_logstash):
     merchant_kafka_mongo = BashOperator(task_id='merchant_kafka_mongo',
                                         bash_command="cd {}/system/logstash/ ; ./logstash.sh {} {}".format(python_path,
                                                                                                            'up',
-                                                                                                           'kafka_mongo_merchant'),
+                                                                                                           'kafka_example'),
                                         dag=logstash_kafka_mongo_merchant_dag)
 
 else:

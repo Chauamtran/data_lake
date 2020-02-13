@@ -66,21 +66,30 @@ TO be recommended:
   IMPORTANT NOTES: Config Ip address of hadoop, kafka, zookeeper in 
   **cluster.sh, kafka_cluster.sh, zookeeper_cluster.sh**  
   Start hadoop cluster, then zookeeper then kafka last
+  * Add **/etc/hosts** the following lines:
+  > - ip_address1 nodemaster psqlhms mongodb_node1
+  > - ip_address2 node2 mongodb_node2
+  > - ip_address3 node3 mongodb_node3
+  > - ip_address4 etl
+  > - ip_address5 kafka-1 zk-1
+  > - ip_address6 kafka-2 zk-2
+  > - ip_address7 kafka-3 zk-3
+  * Under **hdfs_hive_spark** folder, to start hadoop cluster
+  > - ./build_nodemaster.sh
+  > - ./build_datanode.sh
+  > - ./nodemaster.sh 
+  > - ./node2.sh
+  > - ./node3.sh
   
-  Under **hdfs_hive_spark** folder, to start hadoop cluster
-  > - ./build.sh
-  > - ./cluster.sh start version(1.0.0) # To start hadoop cluster with project version, default = 1.0.0
-  > - ./cluster.sh stop # To stop hadoop cluster
-  
-  Under **./hdfs_hive_spark/kafka_zookeeper** folder, to start zookeeper cluster
+  * Under **./hdfs_hive_spark/kafka_zookeeper** folder, to start zookeeper cluster
   > - ./zookeeper_cluster.sh start # To start zookeeper cluster
   > - ./zookeeper_cluster.sh stop # To stop zookeeper cluster 
 
-  Under **./hdfs_hive_spark/kafka_zookeeper** folder, to start kafka cluster
+  * Under **./hdfs_hive_spark/kafka_zookeeper** folder, to start kafka cluster
   > - ./kafka_cluster.sh start # To start kafka cluster
   > - ./kafka_cluster.sh start # To stop kafka cluster
 
-  Under **./hdfs_hive_spark/logstash** folder, to start a logstash instance
+  * Under **./hdfs_hive_spark/logstash** folder, to start a logstash instance
   > - ./logstash.sh instance_name start # To start a logstash instance
   > - ./logstash.sh instance_name stop # To stop a logstash instance
   > - ./logstash.sh instance_name delete # To delete a logstash instance

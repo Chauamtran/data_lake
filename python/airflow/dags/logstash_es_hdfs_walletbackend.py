@@ -30,7 +30,7 @@ if os.path.exists(call_logstash):
     walletbackend_es_kafka_hdfs = BashOperator(task_id='walletbackend_es_kafka_hdfs',
                                                bash_command="cd {}/system/logstash/ ; ./logstash.sh {} {}".format(python_path,
                                                                                                                 'up',
-                                                                                                                'es_hdfs_walletbackend'),
+                                                                                                                'es_example'),
                                                dag=logstash_es_hdfs_walletbackend_dag)
 
 else:

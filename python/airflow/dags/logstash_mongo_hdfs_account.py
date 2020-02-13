@@ -30,7 +30,7 @@ if os.path.exists(call_logstash):
     account_mongo_kafka_hdfs = BashOperator(task_id='account_mongo_kafka_hdfs',
                                             bash_command="cd {}/system/logstash/ ; ./logstash.sh {} {}".format(python_path,
                                                                                                               'up',
-                                                                                                              'mongo_hdfs_account'),
+                                                                                                              'mongo_example'),
                                             dag=logstash_mongo_hdfs_account_dag)
 
 else:

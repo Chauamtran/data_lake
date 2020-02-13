@@ -7,7 +7,7 @@ USER root
 
 # OpenJDK installation
 RUN apt-get update && \
-    apt-get install -y openjdk-8-jre && \
+    apt-get install -y openjdk-8-jre pdsh && \
     echo "PubkeyAuthentication yes" >> /etc/ssh/ssh_config && \
     mkdir -p /home/hadoop/.ssh && \
     echo "PubkeyAcceptedKeyTypes +ssh-dss" >> /home/hadoop/.ssh/config && \

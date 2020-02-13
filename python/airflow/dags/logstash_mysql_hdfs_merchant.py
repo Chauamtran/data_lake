@@ -30,7 +30,7 @@ if os.path.exists(call_logstash):
     merchant_mysql_kafka_hdfs = BashOperator(task_id='merchant_mysql_kafka_hdfs',
                                              bash_command="cd {}/system/logstash/ ; ./logstash.sh {} {}".format(python_path,
                                                                                                                 'up',
-                                                                                                                'mysql_hdfs_merchant'),
+                                                                                                                'mysql_example'),
                                              dag=logstash_mysql_hdfs_merchant_dag)
 
 else:
