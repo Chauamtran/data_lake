@@ -27,3 +27,5 @@ This folder includes some python script examples
 # Usage
   * Manage jobs on airflow by add scripts to folders under <em>airflow<em>
   * To start other scripts, under <em>python</em> run ``` pipenv run python script.py ```
+  * To run testcases, for example, 
+  under <em>python</em> run ``` pipenv run pytest tests/logstash/test_logstash.py ```
