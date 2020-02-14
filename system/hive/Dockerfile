@@ -7,10 +7,10 @@ USER root
 
 # get sources
 RUN apt-get install -y libpostgresql-jdbc-java && \
-    wget http://mirror.downloadvn.com/apache/hive/hive-2.3.6/apache-hive-2.3.6-bin.tar.gz -P /home/hadoop/ && \
-    tar -xzf /home/hadoop/apache-hive-2.3.6-bin.tar.gz -C /home/hadoop/ && \
-    mv /home/hadoop/apache-hive-2.3.6-bin /home/hadoop/hive && \
-    rm -rf /home/hadoop/apache-hive-2.3.6*
+    wget http://mirror.downloadvn.com/apache/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz -P /home/hadoop/ && \
+    tar -xzf /home/hadoop/apache-hive-3.1.2-bin.tar.gz -C /home/hadoop/ && \
+    mv /home/hadoop/apache-hive-3.1.2-bin /home/hadoop/hive && \
+    rm -rf /home/hadoop/apache-hive-3.1.2*
 
 # set environment variables
 ENV HIVE_HOME /home/hadoop/hive

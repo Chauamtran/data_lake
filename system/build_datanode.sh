@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# generate ssh key
-#echo "Y" | ssh-keygen -t rsa -b 4096 -P "" -f configs/id_rsa
+
+# Force to change permission of keys
+sudo chmod 600 configs/id_rsa
+sudo chmod 600 configs/id_rsa.pub
+sudo chmod 644 ~/.ssh/known_hosts
 
 # Make build images
 make build

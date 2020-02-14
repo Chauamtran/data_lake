@@ -8,6 +8,7 @@ USER root
 COPY config/$FOLDER /usr/share/logstash/pipeline/
 COPY config/$FOLDER/logstash.yml /usr/share/logstash/config/logstash.yml
 COPY config/$FOLDER/pipelines.yml /usr/share/logstash/config/pipelines.yml
+COPY lib/logstash-offline-mongodb-6.8.5.zip /usr/share/logstash/$FOLDER/logstash-offline-mongodb-6.8.5.zip
 
 RUN rm -f /usr/share/logstash/pipeline/logstash.conf && \
     logstash-plugin install file:///usr/share/logstash/$FOLDER/logstash-offline-mongodb-6.8.5.zip && \

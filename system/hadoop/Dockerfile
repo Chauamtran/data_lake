@@ -7,11 +7,13 @@ USER root
 
 # OpenJDK installation
 RUN apt-get update && \
-    apt-get install -y openjdk-8-jre pdsh && \
+    apt-get install -y openjdk-8-jre && \
     echo "PubkeyAuthentication yes" >> /etc/ssh/ssh_config && \
+    echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
     mkdir -p /home/hadoop/.ssh && \
     echo "PubkeyAcceptedKeyTypes +ssh-dss" >> /home/hadoop/.ssh/config && \
     echo "PasswordAuthentication no" >> /home/hadoop/.ssh/config && \
+    echo "StrictHostKeyChecking no" >> /home/hadoop/.ssh/config && \
     echo "Port 22000" >> /etc/ssh/sshd_config && \
     echo "PubkeyAcceptedKeyTypes +ssh-dss" >> /etc/ssh/sshd_config && \
     echo "PubkeyAuthentication yes" >> /etc/ssh/sshd_config && \

@@ -12,14 +12,14 @@ VERSION := 1.0.0
 
 build-hdfs-base:
 	# If the image already exists, not rebuild it
-ifeq ("$(shell docker images | grep hdfs-base | cut -d ' ' -f 1)","")
+ifeq ("$(shell docker images | grep -c hdfs-base)","0")
 	docker build --build-arg UID="$$(id -u)" --build-arg GID="$$(id -g)" --rm -t hdfs-base:$(VERSION) -f docker/docker.base .;
 endif
 
 build-images: build-hdfs-base
     # If the image already exists, not rebuild it
 	@for image in $(CUSTOMIZED_IMAGES) ; do \
-	    if [[ "$(shell docker images | grep $$"image" | cut -d ' ' -f 1)" = "" ]]; then \
+	    if [[ "$(shell docker images | grep -c $$"image")" = "0" ]]; then \
 	        docker build --build-arg VERSION=$(VERSION) --rm -t $$image:$(VERSION) -f $$image/Dockerfile .; \
         fi \
 	done

@@ -3,6 +3,11 @@
 # generate ssh key, only for nodemaster
 echo "Y" | ssh-keygen -t rsa -b 4096 -P "" -f configs/id_rsa
 
+# Force to change permission of keys
+sudo chmod 600 configs/id_rsa
+sudo chmod 600 configs/id_rsa.pub
+sudo chmod 644 ~/.ssh/known_hosts
+
 # Copy ssh keys to data nodes
 echo "Copying ssh keys to data nodes. Also use nodemaster as datanote when it is necessary"
 ssh-copy-id -i $HOME/data_lake/system/configs/id_rsa.pub sdeploy@nodemaster

@@ -55,10 +55,23 @@
     </property>
     <property>
             <name>dfs.replication</name>
-            <value>3</value>
+            <value>2</value>
     </property>
     <property>
             <name>dfs.user.home.dir.prefix</name>
             <value>/home</value>
     </property>
+    <property>
+            <name>dfs.namenode.avoid.read.stale.datanode</name>
+            <value>true</value>
+    </property>
+    <property>
+            <name>dfs.namenode.avoid.write.stale.datanode</name>
+            <value>true</value>
+    </property>
+    <property>
+            <name>dfs.blocksize</name>
+            <value>33554432</value> <!-- 32MB, should set to 128MB for large files -->
+    </property>
+
 </configuration>
