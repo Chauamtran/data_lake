@@ -3,7 +3,7 @@
 
 ![](Data_Lake_Architecture.jpg?raw=true) 
 
-This project aims to help a person to build a big data project with many popular tools. 
+This project aims to build a big data project with many popular tools. 
 Since this is built by *docker*, you can easily deploy it on many different infrastructures. 
 The project also supports to deploy services with a cluster model. 
 There is a plan to integrate kubernetes into the project as well.
@@ -98,8 +98,11 @@ Folder **python** contains python scripts that use to define tasks in airflow an
   > - ip_address7 kafka-3 zk-3
 
   Under **system** folder, to build hadoop images
-    1. ./build_nodemaster.sh
-    2. ./build_datanode.sh
+  ```
+  1. ./build_nodemaster.sh
+  2. ./build_datanode.sh
+
+  ```
     
   Under **system/hadoop** folder:
   * To start hadoop, postgres, hive services
